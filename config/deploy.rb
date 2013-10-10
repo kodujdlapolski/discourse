@@ -40,22 +40,40 @@ branches = {:production => :master}
 set(:branch) { branches[fetch(:stage).to_sym].to_s } unless exists?(:branch)
 
 set :gateway, "deploy@s.netguru.co" unless exists?(:gateway)
-# General Settings
 
-# database.yml symlink hook
-#after "deploy:update_code", "deploy:secondary_symlink"
 after "deploy:update_code", "bundle:install"
-after "deploy:update_code", "deploy:migrate"
-after "deploy:update_code", "netguru:precompile"
+after "deploy:update_code", "deploy:precompile"
 
 namespace :deploy do
+
+  task :default do
+    transaction do
+      update
+      migrate unless fetch(:skip_migrations, false)
+      restart
+    end
+  end
+
+  task :symlink do
+  end
+
+  task :precompile do
+    run "cd #{current_path} && #{runner} rake assets:precompile"
+  end
+
+  task :update do
+    transaction do
+      update_code
+    end
+  end
 
   task :migrate do
     run "cd #{current_path} && #{runner} rake db:migrate"
   end
 
+  desc "Update the deployed code"
   task :update_code, :except => { :no_release => true } do
-    run "cd #{current_path} && git checkout #{branch} && git pull origin #{branch}"
+      run "cd #{current_path} && git checkout #{branch} && git pull origin #{branch}"
   end
 
   task :restart, :except => { :no_release => true } do
