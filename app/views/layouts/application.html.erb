@@ -22,6 +22,8 @@
     <%= render :partial => "common/special_font_face" %>
     <%= render :partial => "common/discourse_stylesheet" %>
 
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
     <%= discourse_csrf_tags %>
 
     <%= yield :head %>
@@ -29,6 +31,22 @@
 
   <body>
     <!--[if IE 9]><script type="text/javascript">ie = "new";</script><![endif]-->
+
+    <div id="epaszport">
+      <div class="epaszportContent">
+          <div class="epaszportLogo">
+              <h1>ePAŃSTWO</h1>
+          </div>
+          <div class="epaszportList">
+              <nav class="hidden-xs">
+                  <a href="http://sejmometr.pl" target="_blank">SEJMOMETR</a>
+                  <a href="http://epf.org.pl/api" target="_blank">API</a>
+                  <a href="http://epf.org.pl/kodujdlapolski" target="_blank">KODUJ DLA POLSKI</a>
+                  <a class="active" href="http://epf.org.pl" target="_blank">FUNDACJA ePAŃSTWO</a>
+              </nav>
+          </div>
+      </div>
+    </div>
 
     <%= SiteCustomization.custom_header(session[:preview_style], mobile_view? ? :mobile : :desktop) %>
     <section id='main'>
