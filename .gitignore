@@ -35,6 +35,7 @@ config/environments/production.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.log.*
 /tmp
 /plugins
 /logfile
