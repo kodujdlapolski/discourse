@@ -218,12 +218,12 @@
     margin-top: 20px;
 }
 
-#ePFheader .headline .line .menu a {
+#ePFheader .headline .line a {
     display: block;
     float: right;
 }
 
-#ePFheader .headline .line .menu a .logo{
+#ePFheader .headline .line a .logo{
     width: 100px;
 }
 
