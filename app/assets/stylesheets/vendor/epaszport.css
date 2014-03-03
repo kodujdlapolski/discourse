@@ -187,31 +187,35 @@
 
 #ePFheader {
     background: none repeat scroll 0 0 #FFFFFF;
-    height: 115px;
-    padding: 25px 0 30px;
+    height: 155px;
+    padding: 20px 0;
     top: 40px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 5px rgba(0, 0, 0, 0.075);
 }
 
 #ePFheader .headline > h3 {
     margin: 0;
-    width: 217px;
+    width: 250px;
     float: left;
 }
 
-#ePFheader .headline > h3 .logo {
-    margin-left: 25px;
-    width: 192px;
+#ePFheader .headline > h3 a {
+    display: block;
+    float: left;
+}
+
+#ePFheader .headline > h3 a .logo {
+    width: 240px;
 }
 
 #ePFheader .headline .line {
     float: right;
     clear: right;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
 }
 
 #ePFheader .headline .line.first{
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 #ePFheader .headline .line .menu a {

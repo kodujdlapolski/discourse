@@ -63,7 +63,7 @@ Discourse.HeaderView = Discourse.View.extend({
     return false;
   },
 
-  examineDockHeader: function() {
+  /*examineDockHeader: function() {
 
     var headerView = this;
 
@@ -90,7 +90,7 @@ Discourse.HeaderView = Discourse.View.extend({
       }
     });
 
-  },
+  },*/
   /**
     Display the correct logo in the header, showing a custom small icon if it exists.
     In case the logo_url setting is empty, shows the site title as the logo.
