@@ -1,8 +1,6 @@
 <div class='container'>
   <div class='contents clearfix'>
 
-    {{view.logoHTML}}
-
     {{#if showExtraInfo}}
       <div class="extra-info-wrapper">
         <div class="extra-info">
@@ -25,6 +23,25 @@
         </div>
       </div>
     {{/if}}
+
+    <div id='list-controls'>
+        <ul class="nav nav-pills" id='category-filter'>
+          {{each availableNavItems itemViewClass="Discourse.NavItemView"}}
+        </ul>
+
+        {{#if canCreateTopic}}
+          <button class='btn btn-default' {{action createTopic}}><i class='icon icon-plus'></i>{{createTopicText}}</button>
+        {{/if}}
+
+        {{#if canEditCategory}}
+          <button class='btn btn-default' {{action editCategory category}}><i class="icon icon-wrench"></i> {{i18n category.edit_long}}</button>
+        {{/if}}
+
+        {{#if canCreateCategory}}
+          <button class='btn btn-default' {{action createCategory}}><i class='icon icon-plus'></i>{{i18n category.create}}</button>
+        {{/if}}
+
+    </div>
 
     <div class='panel clearfix'>
       {{#unless showExtraInfo}}
