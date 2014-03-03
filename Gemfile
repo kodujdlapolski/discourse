@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 # monkey patching to support dual booting
 module Bundler::SharedHelpers
   def default_lockfile=(path)
@@ -32,7 +34,7 @@ if rails4?
   end
 end
 
-gem 'seed-fu' , github: 'SamSaffron/seed-fu'
+gem 'seed-fu', :github => 'SamSaffron/seed-fu'
 
 if rails4?
   gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '4-0-stable'
@@ -46,7 +48,7 @@ else
   gem 'strong_parameters' # remove when we upgrade to Rails 4
   # we are using a custom sprockets repo to work around: https://github.com/rails/rails/issues/8099#issuecomment-16137638
   # REVIEW EVERY RELEASE
-  gem 'sprockets', git: 'https://github.com/SamSaffron/sprockets.git', branch: 'rails-compat'
+  gem 'sprockets', :git => 'https://github.com/SamSaffron/sprockets.git', :branch => 'rails-compat'
   gem 'redis-rails'
   gem 'activerecord-postgres-hstore'
   gem 'active_attr'
@@ -64,9 +66,9 @@ gem 'ember-source', '1.0.0.rc6.2'
 gem 'handlebars-source', '1.0.12'
 gem 'barber'
 
-gem 'vestal_versions', git: 'https://github.com/zhangyuan/vestal_versions'
+gem 'vestal_versions', :git => 'https://github.com/laserlemon/vestal_versions', :tag => 'v1.1.0'
 
-gem 'message_bus', git: 'https://github.com/SamSaffron/message_bus'
+gem 'message_bus', :git => 'https://github.com/SamSaffron/message_bus'
 gem 'rails_multisite', path: 'vendor/gems/rails_multisite'
 gem 'simple_handlebars_rails', path: 'vendor/gems/simple_handlebars_rails'
 
@@ -107,7 +109,6 @@ gem 'rake'
 gem 'rest-client'
 gem 'rinku'
 gem 'sanitize'
-gem 'sass'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: nil

@@ -84,18 +84,19 @@ GIT
       omniauth (~> 1.0)
 
 GIT
+  remote: https://github.com/laserlemon/vestal_versions
+  revision: f0bed09ac7ea25878abc7363cea8bbcbf9e2f089
+  tag: v1.1.0
+  specs:
+    vestal_versions (1.1.0)
+      activerecord (>= 3, < 5)
+      activesupport (>= 3, < 5)
+
+GIT
   remote: https://github.com/lawrencepit/email_reply_parser.git
   revision: 67408dfb1b99fb8d5f145f782b9e22d1851a8e5a
   specs:
     email_reply_parser (0.6)
-
-GIT
-  remote: https://github.com/zhangyuan/vestal_versions
-  revision: 0ea75ec4e269b5a9e609639919ade0f36381a446
-  specs:
-    vestal_versions (1.2.2)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
 
 PATH
   remote: vendor/gems/discourse_emoji
@@ -161,7 +162,7 @@ GEM
     airbrake (3.1.2)
       activesupport
       builder
-    arel (3.0.2)
+    arel (3.0.3)
     barber (0.4.2)
       ember-source
       execjs
@@ -226,7 +227,7 @@ GEM
     hike (1.2.3)
     hiredis (0.4.5)
     httpauth (0.2.0)
-    i18n (0.6.4)
+    i18n (0.6.9)
     ice_cube (0.11.0)
     image_optim (0.8.0)
       fspath (~> 2.0.3)
@@ -258,7 +259,7 @@ GEM
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     mock_redis (0.8.1)
-    multi_json (1.7.8)
+    multi_json (1.8.4)
     multipart-post (1.2.0)
     mustache (0.99.4)
     net-scp (1.1.2)
@@ -459,7 +460,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.37)
+    tzinfo (0.3.38)
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
