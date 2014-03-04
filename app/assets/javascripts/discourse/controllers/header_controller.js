@@ -165,6 +165,6 @@ Discourse.HeaderController = Discourse.Controller.extend({
     }.property('category')
 });
 
-Discourse.ListController.reopenClass({
+Discourse.HeaderController.reopenClass({
     filters: ['latest', 'hot', 'favorited', 'read', 'unread', 'new', 'posted']
 });
