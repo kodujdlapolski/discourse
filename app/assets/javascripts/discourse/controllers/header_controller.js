@@ -14,19 +14,60 @@ Discourse.HeaderController = Discourse.Controller.extend({
     canCreateTopic: false,
     needs: ['composer', 'modal', 'listTopics'],
 
-    availableNavItems: function () {
+    categories: function() {
+        return Discourse.Category.list();
+    }.property(),
+
+    showFavoriteButton: function() {
+        return Discourse.User.current() && !this.get('topic.isPrivateMessage');
+    }.property('topic.isPrivateMessage'),
+
+    mobileDevice: function() {
+        return Discourse.Mobile.isMobileDevice;
+    }.property(),
+
+    mobileView: function() {
+        return Discourse.Mobile.mobileView;
+    }.property(),
+
+    showMobileToggle: function() {
+        return Discourse.SiteSettings.enable_mobile_theme;
+    }.property(),
+
+    actions: {
+        toggleStar: function() {
+            var topic = this.get('topic');
+            if (topic) topic.toggleStar();
+            return false;
+        },
+
+        toggleMobileView: function() {
+            Discourse.Mobile.toggleMobileView();
+        },
+        createTopic: function() {
+            this.get('controllers.composer').open({
+                categoryId: this.get('category.id'),
+                action: Discourse.Composer.CREATE_TOPIC,
+                draft: this.get('draft'),
+                draftKey: this.get('draft_key'),
+                draftSequence: this.get('draft_sequence')
+            });
+        }
+    },
+
+    availableNavItems: function() {
         var loggedOn = !!Discourse.User.current();
 
-        return Discourse.SiteSettings.top_menu.split("|").map(function (i) {
+        return Discourse.SiteSettings.top_menu.split("|").map(function(i) {
             return Discourse.NavItem.fromText(i, {
                 loggedOn: loggedOn
             });
-        }).filter(function (i) {
+        }).filter(function(i) {
             return i !== null;
         });
     }.property(),
 
-    createTopicText: function () {
+    createTopicText: function() {
         if (this.get('category.name')) {
             return I18n.t("topic.create_in", {
                 categoryName: this.get('category.name')
@@ -41,7 +82,7 @@ Discourse.HeaderController = Discourse.Controller.extend({
 
      @method refresh
      **/
-    refresh: function () {
+    refresh: function() {
         var listTopicsController = this.get('controllers.listTopics');
         listTopicsController.set('model.loaded', false);
         this.load(this.get('filterMode')).then(function (topicList) {
@@ -56,14 +97,14 @@ Discourse.HeaderController = Discourse.Controller.extend({
      @param {String} filterMode the filter we want to load
      @returns {Ember.Deferred} the promise that will resolve to the list of items.
      **/
-    load: function (filterMode) {
+    load: function(filterMode) {
         var listController = this;
         this.set('loading', true);
 
         var trackingState = Discourse.TopicTrackingState.current();
 
         if (filterMode === 'categories') {
-            return Discourse.CategoryList.list(filterMode).then(function (items) {
+            return Discourse.CategoryList.list(filterMode).then(function(items) {
                 listController.setProperties({
                     loading: false,
                     filterMode: filterMode,
@@ -72,7 +113,7 @@ Discourse.HeaderController = Discourse.Controller.extend({
                     draft_key: items.draft_key,
                     draft_sequence: items.draft_sequence
                 });
-                if (trackingState) {
+                if(trackingState) {
                     trackingState.sync(items, filterMode);
                     trackingState.trackIncoming(filterMode);
                 }
@@ -80,14 +121,12 @@ Discourse.HeaderController = Discourse.Controller.extend({
             });
         }
 
-        var current = (this.get('availableNavItems').filter(function (f) {
-            return f.name === filterMode;
-        }))[0];
+        var current = (this.get('availableNavItems').filter(function(f) { return f.name === filterMode; }))[0];
         if (!current) {
             current = Discourse.NavItem.create({ name: filterMode });
         }
 
-        return Discourse.TopicList.list(current).then(function (items) {
+        return Discourse.TopicList.list(current).then(function(items) {
             listController.setProperties({
                 loading: false,
                 filterMode: filterMode,
@@ -95,7 +134,7 @@ Discourse.HeaderController = Discourse.Controller.extend({
                 draft_key: items.draft_key,
                 draft_sequence: items.draft_sequence
             });
-            if (trackingState) {
+            if(trackingState) {
                 trackingState.sync(items, filterMode);
                 trackingState.trackIncoming(filterMode);
             }
@@ -104,7 +143,7 @@ Discourse.HeaderController = Discourse.Controller.extend({
     },
 
     // Put in the appropriate page title based on our view
-    updateTitle: function () {
+    updateTitle: function() {
         if (this.get('filterMode') === 'categories') {
             return Discourse.set('title', I18n.t('categories_list'));
         } else {
@@ -116,65 +155,16 @@ Discourse.HeaderController = Discourse.Controller.extend({
         }
     }.observes('filterMode', 'category'),
 
-    // Create topic button
-    actions: {
-        createTopic: function () {
-            this.get('controllers.composer').open({
-                categoryId: this.get('category.id'),
-                action: Discourse.Composer.CREATE_TOPIC,
-                draft: this.get('draft'),
-                draftKey: this.get('draft_key'),
-                draftSequence: this.get('draft_sequence')
-            });
-        }
-    },
-
-    canEditCategory: function () {
-        if (this.present('category')) {
+    canEditCategory: function() {
+        if( this.present('category') ) {
             var u = Discourse.User.current();
             return u && u.staff;
         } else {
             return false;
         }
-    }.property('category'),
-
-    categories: function () {
-        return Discourse.Category.list();
-    }.property(),
-
-    showFavoriteButton: function () {
-        return Discourse.User.current() && !this.get('topic.isPrivateMessage');
-    }.property('topic.isPrivateMessage'),
-
-    mobileDevice: function () {
-        return Discourse.Mobile.isMobileDevice;
-    }.property(),
-
-    mobileView: function () {
-        return Discourse.Mobile.mobileView;
-    }.property(),
-
-    showMobileToggle: function () {
-        return Discourse.SiteSettings.enable_mobile_theme;
-    }.property(),
-
-    actions: {
-        toggleStar: function () {
-            var topic = this.get('topic');
-            if (topic) topic.toggleStar();
-            return false;
-        },
-
-        toggleMobileView: function () {
-            Discourse.Mobile.toggleMobileView();
-        }
-    }
-
+    }.property('category')
 });
 
 Discourse.ListController.reopenClass({
     filters: ['latest', 'hot', 'favorited', 'read', 'unread', 'new', 'posted']
 });
-
-
-
