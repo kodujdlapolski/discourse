@@ -15,7 +15,7 @@
   background-color: #eee;
   border-bottom: 0px !important;
   //border-bottom: 2px solid #b61118;
-  //box-shadow: inset 0 -1px 1px #efefef;
+  box-shadow: none !important;
 
   .docked & {
     position: fixed;

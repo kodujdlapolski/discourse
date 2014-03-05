@@ -8,20 +8,19 @@
 // List controls
 // --------------------------------------------------
 
-//#list-controls {
-//  margin: 5px;
-//  .nav {
-//    float: left;
-//    margin-right: 15px;
-//    li {
-//      margin-top: 5px;
-//    }
-//  }
-//  .btn {
-//    float: right;
-//    margin-left: 8px;
-//  }
-//}
+#list-controls {
+  .nav {
+    float: left;
+    margin-right: 15px;
+    li {
+      margin-top: 5px;
+    }
+  }
+  .btn {
+    float: right;
+    margin-left: 8px;
+  }
+}
 
 #category-filter {
   .has-icon span:before {
