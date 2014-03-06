@@ -187,10 +187,15 @@
 
 #ePFheader {
     background: none repeat scroll 0 0 #FFFFFF;
-    height: 65px;
+    height: 115px;
     padding: 25px 0;
     top: 40px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 5px rgba(0, 0, 0, 0.075);
+}
+
+#epfheader .container {
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 #ePFheader .headline > h3 {
